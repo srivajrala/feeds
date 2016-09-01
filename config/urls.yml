@@ -1,0 +1,6 @@
+production:
+  urls: "http://rss.cnn.com/rss/cnn_us.rss"
+test:
+  urls: "http://rss.cnn.com/rss/cnn_us.rss"
+development:
+  urls: "http://rss.cnn.com/rss/cnn_us.rss"

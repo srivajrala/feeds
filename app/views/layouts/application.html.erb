@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>RssFeeds</title>
+  <%= stylesheet_link_tag    'default', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'default', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/"  style="color: white;"><strong>CNN RSS Feeds</strong></a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+          <% if user_signed_in? %><li><%= link_to " Logout", destroy_user_session_path, method: :delete, class: "glyphicon glyphicon-user white" %></li><% end %>
+        </ul>
+      </div>
+    </nav>
+   <% if flash and flash.any? %>
+        <div class="container-fluid">
+        <div class="row">
+        <div class="col-sm-10 col-md-10">
+        <% flash.each do |key, value| 
+           alert = "default"
+           case key
+             when 'notice'
+               alert = "success"
+             when 'error'
+               alert = "danger"
+             when 'message'
+               alert = "info"
+             end
+        %>    
+          <div id="error_explanation" class='alert alert-<%= key == 'notice' ? "success" : "danger"  %>' role="alert"><%= value.html_safe %></div>
+        <% end %>
+        </div>
+        </div>
+        </div>
+    <% end %>
+    <div class="container-fluid">
+      <div class="row">
+       <div class="col-sm-12 col-md-12 main">
+         <%= yield %>
+        </div>
+      </div>
+    </div>
+</body>
+</html>

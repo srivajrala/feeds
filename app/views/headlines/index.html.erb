@@ -1,0 +1,24 @@
+<span class="glyphicon glyphicon-star" style="color:red"></span> - Your Favourite<br />
+<span class="glyphicon glyphicon-star"></span> - Not your favourite
+
+<h3 class="text-info">RSS FEED TITLE: <u><%= @title %></u></h3>
+
+<table class="table table-bordered table-striped table-condensed table-hover">
+<% @headlines.each do |headline| 
+   favourite = @favourites.detect{|fav| fav.content == headline.content} %>
+  <tr>
+    <td>
+        <% if favourite.nil? %> 
+           <%= link_to favourites_path(favourite: {user_id: current_user.id, content: headline.content}), method: :post, class: "btn btn-default", remote: true do %>
+             <span class="glyphicon glyphicon-star"></span> 
+           <% end %>
+        <% else %>
+           <%= link_to favourite, method: :delete, class: "btn btn-default", remote: true do %>
+             <span class="glyphicon glyphicon-star" style="color:red"></span> 
+           <% end %>
+        <% end %> 
+        <%= link_to headline.title, headline.content, target: "_blank" %>
+    </td> 
+  </tr>
+<% end %>
+</table>
